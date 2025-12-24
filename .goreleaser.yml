@@ -11,7 +11,7 @@ builds:
     main: ./cmd/
     binary: git-get
     ldflags:
-      - -s -w 
+      - -s -w
       - -X github.com/grdl/git-get/pkg/cfg.version={{.Version}}
       - -X github.com/grdl/git-get/pkg/cfg.commit={{.Commit}}
     goos:
@@ -27,7 +27,7 @@ builds:
     main: ./cmd/
     binary: git-get
     ldflags:
-      - -s -w 
+      - -s -w
       - -X github.com/grdl/git-get/pkg/cfg.version={{.Version}}
       - -X github.com/grdl/git-get/pkg/cfg.commit={{.Commit}}
     goos:
@@ -47,7 +47,7 @@ archives:
     format_overrides:
       - goos: windows
         formats: [zip]
-    # Don't include any additional files into the archives (such as README, CHANGELOG etc). 
+    # Don't include any additional files into the archives (such as README, CHANGELOG etc).
     files:
       - none*
   - id: macos-archive
@@ -57,10 +57,10 @@ archives:
     formats:
       - tar.gz
     files:
-      - none* 
+      - none*
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 
 changelog:
   disable: true # Changelogs are crafted manually
@@ -69,29 +69,6 @@ release:
   github:
     owner: grdl
     name: git-get
-
-brews:
-  - name: git-get
-    ids:
-      - macos-archive
-    repository:
-      owner: grdl
-      name: homebrew-tap
-      branch: master
-    directory: Formula
-    commit_author:
-      name: Grzegorz Dlugoszewski
-      email: git-get@grdl.dev
-    homepage: https://github.com/grdl/git-get/
-    description: Better way to clone, organize and manage multiple git repositories
-    license: MIT
-    install: |
-      bin.install "git-get"
-      bin.install_symlink "git-get" => "git-list"
-      man1.install "docs/git-get.1"
-    test: |
-      system "#{bin}/git-get", "--version"
-      system "#{bin}/git-list", "--version"
 
 nfpms:
   - id: packages
@@ -130,10 +107,11 @@ scoops:
     homepage: "https://github.com/grdl/git-get"
     description: "Better way to clone, organize and manage multiple git repositories"
     license: MIT
-    post_install: [
-      "New-Item -ItemType HardLink -Path \"$dir\\git-list.exe\" -Target \"$dir\\git-get.exe\" -Force | Out-Null",
-      "scoop shim add git-list \"$dir\\git-list.exe\""
-    ]
+    post_install:
+      [
+        "New-Item -ItemType HardLink -Path \"$dir\\git-list.exe\" -Target \"$dir\\git-get.exe\" -Force | Out-Null",
+        "scoop shim add git-list \"$dir\\git-list.exe\"",
+      ]
 
     # goreleaser doesn't support pre/post uninstall scripts yet
     # https://goreleaser.com/customization/scoop/

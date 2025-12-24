@@ -66,7 +66,7 @@ It provides two commands through a single binary:
 
 **Option 1: Homebrew (Recommended)**
 ```bash
-brew install grdl/tap/git-get
+brew install git-get
 ```
 *This automatically installs both `git-get` and `git-list` commands.*
 
@@ -106,7 +106,7 @@ sudo ln -sf /usr/local/bin/git-get /usr/local/bin/git-list
 
 **Option 3: Homebrew on Linux**
 ```bash
-brew install grdl/tap/git-get
+brew install git-get
 ```
 
 ### Windows
@@ -384,6 +384,33 @@ golangci-lint run -v
 # Fix auto-fixable issues
 golangci-lint run --fix
 ```
+
+### Releasing a New Version
+
+For maintainers releasing a new version:
+
+1. **Create and push a new git tag:**
+
+```bash
+git tag v0.7.0
+git push origin v0.7.0
+```
+
+2. **GitHub Actions will automatically:**
+   - Build binaries for all platforms
+   - Create a GitHub release with assets
+   - Update the Scoop package
+
+3. **Update Homebrew-core formula:**
+
+```bash
+# Replace with your actual version
+brew bump-formula-pr --tag=v0.7.0 git-get
+```
+
+This command automatically downloads the new release, calculates checksums, updates the formula, and creates a PR to homebrew-core.
+
+**Note:** Since git-get is in homebrew-core, the community or Homebrew's automated systems may also update the formula when new releases are detected.
 
 ## License
 
