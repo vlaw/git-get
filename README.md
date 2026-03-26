@@ -52,7 +52,7 @@ It provides two commands through a single binary:
 - **Multi-platform** - Works on macOS, Linux, and Windows
 - **Repository discovery** - Lists all repositories with their status
 - **Flexible configuration** - Supports environment variables and Git config
-- **Multiple output formats** - Tree, flat, flat-dir, and dump formats for different use cases
+- **Multiple output formats** - Tree, flat, ls, and dump formats for different use cases
 - **Dotfiles friendly** - Clone multiple repositories from a list kept in dotfiles
 
 ## Prerequisites
@@ -194,7 +194,7 @@ git list [flags]
 
 **Flags:**
 - `-f, --fetch` - Fetch from remotes before listing
-- `-o, --out <format>` - Output format: tree, flat, flat-dir, or dump (default: tree)
+- `-o, --out <format>` - Output format: tree, flat, ls, or dump (default: tree)
 - `-r, --root <path>` - Root directory to scan (default: ~/repositories)
 - `-h, --help` - Show help
 - `-v, --version` - Show version
@@ -207,7 +207,7 @@ git list [flags]
 **Flat format:**
 ![output_flat](./docs/out_flat.png)
 
-**Flat-dir format:**
+**Ls format:**
 Displays repository directory absolute paths only, one per line (no status information).
 
 **Dump format:**

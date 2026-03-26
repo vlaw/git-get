@@ -37,14 +37,14 @@ var Defaults = map[string]string{
 
 // Values for the --out flag.
 const (
-	OutDump    = "dump"
-	OutFlat    = "flat"
-	OutFlatDir = "flat-dir"
-	OutTree    = "tree"
+	OutDump = "dump"
+	OutFlat = "flat"
+	OutLs   = "ls"
+	OutTree = "tree"
 )
 
 // AllowedOut are allowed values for the --out flag.
-var AllowedOut = []string{OutDump, OutFlat, OutFlatDir, OutTree}
+var AllowedOut = []string{OutDump, OutFlat, OutLs, OutTree}
 
 // Version metadata set by ldflags during the build.
 var (
