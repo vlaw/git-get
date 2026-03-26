@@ -37,13 +37,14 @@ var Defaults = map[string]string{
 
 // Values for the --out flag.
 const (
-	OutDump = "dump"
-	OutFlat = "flat"
-	OutTree = "tree"
+	OutDump    = "dump"
+	OutFlat    = "flat"
+	OutFlatDir = "flat-dir"
+	OutTree    = "tree"
 )
 
 // AllowedOut are allowed values for the --out flag.
-var AllowedOut = []string{OutDump, OutFlat, OutTree}
+var AllowedOut = []string{OutDump, OutFlat, OutFlatDir, OutTree}
 
 // Version metadata set by ldflags during the build.
 var (
@@ -108,9 +109,9 @@ func readGitconfig(cfg Gitconfig) {
 // If expansion fails or is not needed, the config is not modified.
 func Expand(key string) {
 	path := viper.GetString(key)
-	if strings.HasPrefix(path, "~") {
+	if after, ok := strings.CutPrefix(path, "~"); ok {
 		if homeDir, err := os.UserHomeDir(); err == nil {
-			expanded := filepath.Join(homeDir, strings.TrimPrefix(path, "~"))
+			expanded := filepath.Join(homeDir, after)
 			viper.Set(key, expanded)
 		}
 	}

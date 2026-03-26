@@ -37,6 +37,8 @@ func List(conf *ListCfg) error {
 	switch conf.Output {
 	case cfg.OutFlat:
 		fmt.Print(out.NewFlatPrinter().Print(printables))
+	case cfg.OutFlatDir:
+		fmt.Print(out.NewFlatDirPrinter().Print(printables))
 	case cfg.OutTree:
 		fmt.Print(out.NewTreePrinter().Print(conf.Root, printables))
 	case cfg.OutDump:
